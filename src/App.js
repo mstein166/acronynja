@@ -70,7 +70,7 @@ const AcronymGuesser = () => {
     { acronym: 'MERCOSUR', words: ['Mercado', 'Común', 'del', 'Sur'] },
     { acronym: 'SAARC', words: ['South', 'Asian', 'Association', 'for', 'Regional', 'Cooperation'] },
     { acronym: 'APEC', words: ['Asia-Pacific', 'Economic', 'Cooperation'] },
-    { acronym: 'BRICS', words: ['Brazil', 'Russia', 'India', 'China', 'South Africa'] },
+    { acronym: 'BRIC', words: ['Brazil', 'Russia', 'India', 'China'] },
     { acronym: 'BENELUX', words: ['Belgium', 'Netherlands', 'Luxembourg'] },
     { acronym: 'INTERPOL', words: ['International', 'Criminal', 'Police', 'Organization'] },
     { acronym: 'EUROPOL', words: ['European', 'Union', 'Agency', 'for', 'Law', 'Enforcement', 'Cooperation'] },
