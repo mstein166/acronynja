@@ -177,6 +177,7 @@ const AcronymGuesser = () => {
   return (
     <div className="p-4 max-w-md mx-auto">
       <h1 className="text-2xl font-bold mb-4">Acronynja Acronym Guesser</h1>
+      <p className="mb-2">Think you know you know your acronyms?</p>
       <p className="mb-2">Guess the meaning of: <strong>{acronym}</strong></p>
       <p className="mb-4">You have 5 guesses total. Good luck!</p>
       
