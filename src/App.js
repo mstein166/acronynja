@@ -209,7 +209,7 @@ const AcronymGuesser = () => {
           <Button onClick={handleGuess} disabled={!currentGuess}>Submit Guess</Button>
         
   {showAnswerButton && !gameOver && (
-    <Button className="relative flex items-center justify-center px-6" onClick={handleShowAnswer}>
+    <Button className="relative flex items-center justify-center px-16" onClick={handleShowAnswer}>
       <span className="absolute top-0 right-0 mt-1 mr-1 flex h-3 w-3">
         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
         <span className="relative inline-flex rounded-full h-3 w-3 bg-sky-500"></span>
