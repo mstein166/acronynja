@@ -12,6 +12,7 @@ const AcronymGuesser = () => {
   const [feedback, setFeedback] = useState([]);
   const [gameOver, setGameOver] = useState(false);
   const [message, setMessage] = useState('');
+  const [showAnswerButton, setShowAnswerButton] = useState(false);
 
   const acronyms = [
     { acronym: 'NASA', words: ['National', 'Aeronautics', 'and', 'Space', 'Administration'] },
@@ -131,6 +132,7 @@ const AcronymGuesser = () => {
     setFeedback([]);
     setGameOver(false);
     setMessage('');
+    setShowAnswerButton(false);
   };
 
   const handleGuess = () => {
@@ -153,6 +155,10 @@ const AcronymGuesser = () => {
     setFeedback([...feedback, newFeedback]);
     setCurrentGuess('');
 
+    if (!showAnswerButton) {
+      setShowAnswerButton(true);
+    }
+
     if (newFeedback.every(fb => fb === 'correct')) {
       setGameOver(true);
       setMessage('Congratulations! You guessed the acronym correctly!');
@@ -160,6 +166,11 @@ const AcronymGuesser = () => {
       setGameOver(true);
       setMessage(`Game over! The correct answer was: ${answer.join(' ')}`);
     }
+  };
+
+  const handleShowAnswer = () => {
+    setGameOver(true); // End the game
+    setMessage(`Game over! The correct answer was: ${answer.join(' ')}`); // Show the correct answer
   };
 
   return (
@@ -195,6 +206,12 @@ const AcronymGuesser = () => {
             className="mb-2"
           />
           <Button onClick={handleGuess} disabled={!currentGuess}>Submit Guess</Button>
+        </div>
+      )}
+
+    {showAnswerButton && !gameOver && (
+        <div className="mb-4">
+          <Button onClick={handleShowAnswer}>Show me the answer!</Button>
         </div>
       )}
 
