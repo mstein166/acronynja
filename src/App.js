@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Input } from "./components/ui/input"
 import { Button } from "./components/ui/button"
 import { Alert, AlertDescription, AlertTitle } from "./components/ui/alert"
-import 'magic-ui/dist/magic.css';
 // import ShineBorder from "@/components/magicui/shine-border"
 
 
@@ -213,7 +212,7 @@ const AcronymGuesser = () => {
 
     {showAnswerButton && !gameOver && (
         <div className="mb-4">
-          <Button className="magic-shine-pulse" onClick={handleShowAnswer}>Show me the answer!</Button>
+          <Button onClick={handleShowAnswer}>Show me the answer!</Button>
         </div>
       )}
 
