@@ -3,9 +3,17 @@ import { Input } from "./components/ui/input"
 import { Button } from "./components/ui/button"
 import { Alert, AlertDescription, AlertTitle } from "./components/ui/alert"
 
-  
-  const AcronymGuesser = () => {
-    const acronyms = [
+
+const AcronymGuesser = () => {
+  const [acronym, setAcronym] = useState('');
+  const [answer, setAnswer] = useState([]);
+  const [guesses, setGuesses] = useState([]);
+  const [currentGuess, setCurrentGuess] = useState('');
+  const [feedback, setFeedback] = useState([]);
+  const [gameOver, setGameOver] = useState(false);
+  const [message, setMessage] = useState('');
+
+  const acronyms = [
     { acronym: 'NASA', words: ['National', 'Aeronautics', 'and', 'Space', 'Administration'] },
     { acronym: 'ASAP', words: ['As', 'Soon', 'As', 'Possible'] },
     { acronym: 'LASER', words: ['Light', 'Amplification', 'by', 'Stimulated', 'Emission', 'of', 'Radiation'] },
@@ -110,16 +118,7 @@ import { Alert, AlertDescription, AlertTitle } from "./components/ui/alert"
     { acronym: 'CAP', words: ['Consistency', 'Availability', 'Partition', 'Tolerance'] }
     // ... (the rest of the acronyms remain the same as in the previous version)
   ];
-  
-  const getRandomAcronym = () => acronyms[Math.floor(Math.random() * acronyms.length)];
 
-    const [acronym, setAcronym] = useState(getRandomAcronym());
-    const [answer, setAnswer] = useState([]);
-    const [guesses, setGuesses] = useState([]);
-    const [currentGuess, setCurrentGuess] = useState('');
-    const [feedback, setFeedback] = useState([]);
-    const [gameOver, setGameOver] = useState(false);
-    const [message, setMessage] = useState('');
   // useEffect(() => {
   //   newGame();
   // }, []);
