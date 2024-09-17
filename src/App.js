@@ -3,9 +3,10 @@ import { Input } from "./components/ui/input"
 import { Button } from "./components/ui/button"
 import { Alert, AlertDescription, AlertTitle } from "./components/ui/alert"
 
+const getRandomAcronym = () => acronyms[Math.floor(Math.random() * acronyms.length)];
 
 const AcronymGuesser = () => {
-  const [acronym, setAcronym] = useState('');
+  const [acronym, setAcronym] = useState(getRandomAcronym());
   const [answer, setAnswer] = useState([]);
   const [guesses, setGuesses] = useState([]);
   const [currentGuess, setCurrentGuess] = useState('');
