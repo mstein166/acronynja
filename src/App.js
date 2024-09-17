@@ -198,7 +198,7 @@ const AcronymGuesser = () => {
       ))}
 
       {!gameOver && (
-        <div className="mb-4">
+        <div className="flex space-x-4 mb-4">
           <Input
             type="text"
             value={currentGuess}
@@ -207,11 +207,8 @@ const AcronymGuesser = () => {
             className="mb-2"
           />
           <Button onClick={handleGuess} disabled={!currentGuess}>Submit Guess</Button>
-        </div>
-      )}
-
+        
   {showAnswerButton && !gameOver && (
-  <div className="mb-4">
     <Button className="relative flex items-center justify-center" onClick={handleShowAnswer}>
       <span className="absolute top-0 right-0 mt-1 mr-1 flex h-3 w-3">
         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
@@ -219,9 +216,9 @@ const AcronymGuesser = () => {
       </span>
       Show me the answer!
     </Button>
+    )}
   </div>
-)}
-
+    )}
 
       {message && (
         <Alert className="mb-4">
