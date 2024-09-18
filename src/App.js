@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Input } from "./components/ui/input"
 import { Button } from "./components/ui/button"
 import { Alert, AlertDescription, AlertTitle } from "./components/ui/alert"
+import Confetti from 'react-confetti'
 // import ShineBorder from "@/components/magicui/shine-border"
 
 
@@ -15,12 +16,12 @@ const AcronymGuesser = () => {
   const [message, setMessage] = useState('');
   const [showAnswerButton, setShowAnswerButton] = useState(false);
   const [difficulty, setDifficulty] = useState('medium');
+  const [showConfetti, setShowConfetti] = useState(false);
 
   const easyAcronyms = [
     { acronym: 'NASA', words: ['National', 'Aeronautics', 'and', 'Space', 'Administration'] },
     { acronym: 'WHO', words: ['World', 'Health', 'Organization'] },
     { acronym: 'ASAP', words: ['As', 'Soon', 'As', 'Possible'] },
-    { acronym: 'LASER', words: ['Light', 'Amplification', 'by', 'Stimulated', 'Emission', 'of', 'Radiation'] },
     { acronym: 'SCUBA', words: ['Self', 'Contained', 'Underwater', 'Breathing', 'Apparatus'] },
     { acronym: 'RADAR', words: ['Radio', 'Detection', 'And', 'Ranging'] },
     { acronym: 'UNICEF', words: ['United', 'Nations', 'International', 'Children\'s', 'Emergency', 'Fund'] },
@@ -41,6 +42,7 @@ const AcronymGuesser = () => {
     { acronym: 'GDP', words: ['Gross', 'Domestic', 'Product'] },
     { acronym: 'BYOB', words: ['Bring', 'Your', 'Own', 'Bottle'] },
     { acronym: 'PTSD', words: ['Post', 'Traumatic', 'Stress', 'Disorder'] },
+    { acronym: 'ADHD', words: ['Attention', 'Deficit', 'Hyperactivity', 'Disorder'] },
     { acronym: 'DIY', words: ['Do', 'It', 'Yourself'] }
   ]; 
 
@@ -71,9 +73,9 @@ const AcronymGuesser = () => {
 
   const hardAcronyms = [
     { acronym: 'SONAR', words: ['Sound', 'Navigation', 'And', 'Ranging'] },
+    { acronym: 'LASER', words: ['Light', 'Amplification', 'by', 'Stimulated', 'Emission', 'of', 'Radiation'] },
     { acronym: 'USB', words: ['Universal', 'Serial', 'Bus'] },
     { acronym: 'BIOS', words: ['Basic', 'Input/Output', 'System'] },
-    { acronym: 'ADHD', words: ['Attention', 'Deficit', 'Hyperactivity', 'Disorder'] },
     { acronym: 'COBOL', words: ['Common', 'Business', 'Oriented', 'Language'] },
     { acronym: 'FORTRAN', words: ['Formula', 'Translation'] },
     { acronym: 'UNESCO', words: ['United', 'Nations', 'Educational', 'Scientific', 'and', 'Cultural', 'Organization'] },
@@ -159,6 +161,7 @@ const AcronymGuesser = () => {
     setGameOver(false);
     setMessage('');
     setShowAnswerButton(false);
+    setShowConfetti(false); 
   };
 
 useEffect(() => {
@@ -196,6 +199,7 @@ useEffect(() => {
     if (newFeedback.every(fb => fb === 'correct')) {
       setGameOver(true);
       setMessage('Congratulations! You guessed the acronym correctly!');
+      setShowConfetti(true);
     } else if (guesses.length === 4) {
       setGameOver(true);
       setMessage(`Game over! The correct answer was: ${answer.join(' ')}`);
@@ -213,6 +217,7 @@ useEffect(() => {
 
   return (
     <div className="p-4 max-w-md mx-auto">
+      {showConfetti && <Confetti />}
       <h1 className="text-2xl font-bold mb-4">Acronynja</h1>
       <p className="mb-2">Think you know you know your acronyms?</p>
       <p className="mb-4">You have 5 guesses total to show it. Good luck!</p>
