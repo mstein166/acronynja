@@ -14,48 +14,68 @@ const AcronymGuesser = () => {
   const [gameOver, setGameOver] = useState(false);
   const [message, setMessage] = useState('');
   const [showAnswerButton, setShowAnswerButton] = useState(false);
+  const [difficulty, setDifficulty] = useState('medium');
 
-  const acronyms = [
+  const easyAcronyms = [
     { acronym: 'NASA', words: ['National', 'Aeronautics', 'and', 'Space', 'Administration'] },
+    { acronym: 'WHO', words: ['World', 'Health', 'Organization'] },
     { acronym: 'ASAP', words: ['As', 'Soon', 'As', 'Possible'] },
     { acronym: 'LASER', words: ['Light', 'Amplification', 'by', 'Stimulated', 'Emission', 'of', 'Radiation'] },
     { acronym: 'SCUBA', words: ['Self', 'Contained', 'Underwater', 'Breathing', 'Apparatus'] },
     { acronym: 'RADAR', words: ['Radio', 'Detection', 'And', 'Ranging'] },
-    { acronym: 'SONAR', words: ['Sound', 'Navigation', 'And', 'Ranging'] },
     { acronym: 'UNICEF', words: ['United', 'Nations', 'International', 'Children\'s', 'Emergency', 'Fund'] },
     { acronym: 'POTUS', words: ['President', 'Of', 'The', 'United', 'States'] },
     { acronym: 'SCOTUS', words: ['Supreme', 'Court', 'Of', 'The', 'United', 'States'] },
     { acronym: 'STEM', words: ['Science', 'Technology', 'Engineering', 'Mathematics'] },
-    { acronym: 'SMART', words: ['Specific', 'Measurable', 'Achievable', 'Relevant', 'Time-bound'] },
     { acronym: 'SWOT', words: ['Strengths', 'Weaknesses', 'Opportunities', 'Threats'] },
     { acronym: 'CAPTCHA', words: ['Completely', 'Automated', 'Public', 'Turing', 'test', 'to', 'tell', 'Computers', 'and', 'Humans', 'Apart'] },
     { acronym: 'BASIC', words: ['Beginner\'s', 'All-purpose', 'Symbolic', 'Instruction', 'Code'] },
-    { acronym: 'COBOL', words: ['Common', 'Business', 'Oriented', 'Language'] },
-    { acronym: 'FORTRAN', words: ['Formula', 'Translation'] },
-    { acronym: 'JPEG', words: ['Joint', 'Photographic', 'Experts', 'Group'] },
-    { acronym: 'OPEC', words: ['Organization', 'of', 'Petroleum', 'Exporting', 'Countries'] },
-    { acronym: 'AWOL', words: ['Absent', 'Without', 'Official', 'Leave'] },
+    { acronym: 'IMF', words: ['International', 'Monetary', 'Fund'] },
+    { acronym: 'WHO', words: ['World', 'Health', 'Organization'] },
+    { acronym: 'NATO', words: ['North', 'Atlantic', 'Treaty', 'Organization'] },
+    { acronym: 'OCD', words: ['Obsessive', 'Compulsive', 'Disorder'] },
     { acronym: 'NIMBY', words: ['Not', 'In', 'My', 'Back', 'Yard'] },
     { acronym: 'YOLO', words: ['You', 'Only', 'Live', 'Once'] },
     { acronym: 'FOMO', words: ['Fear', 'Of', 'Missing', 'Out'] },
     { acronym: 'FAQ', words: ['Frequently', 'Asked', 'Questions'] },
-    { acronym: 'DIY', words: ['Do', 'It', 'Yourself'] },
+    { acronym: 'GDP', words: ['Gross', 'Domestic', 'Product'] },
     { acronym: 'BYOB', words: ['Bring', 'Your', 'Own', 'Bottle'] },
+    { acronym: 'PTSD', words: ['Post', 'Traumatic', 'Stress', 'Disorder'] },
+    { acronym: 'DIY', words: ['Do', 'It', 'Yourself'] }
+  ]; 
+
+  const mediumAcronyms = [
+    { acronym: 'JPEG', words: ['Joint', 'Photographic', 'Experts', 'Group'] },
+    { acronym: 'SMART', words: ['Specific', 'Measurable', 'Achievable', 'Relevant', 'Time-bound'] },
+    { acronym: 'OPEC', words: ['Organization', 'of', 'Petroleum', 'Exporting', 'Countries'] },
+    { acronym: 'AWOL', words: ['Absent', 'Without', 'Official', 'Leave'] },
     { acronym: 'RSVP', words: ['Répondez', 'S\'il', 'Vous', 'Plaît'] },
     { acronym: 'HVAC', words: ['Heating', 'Ventilation', 'and', 'Air', 'Conditioning'] },
     { acronym: 'WYSIWYG', words: ['What', 'You', 'See', 'Is', 'What', 'You', 'Get'] },
+    { acronym: 'BRIC', words: ['Brazil', 'Russia', 'India', 'China'] },
     { acronym: 'LIFO', words: ['Last', 'In', 'First', 'Out'] },
-    { acronym: 'FIFO', words: ['First', 'In', 'First', 'Out'] },
-    { acronym: 'BIOS', words: ['Basic', 'Input/Output', 'System'] },
-    { acronym: 'ADHD', words: ['Attention', 'Deficit', 'Hyperactivity', 'Disorder'] },
-    { acronym: 'PTSD', words: ['Post', 'Traumatic', 'Stress', 'Disorder'] },
-    { acronym: 'OCD', words: ['Obsessive', 'Compulsive', 'Disorder'] },
+    { acronym: 'API', words: ['Application', 'Programming', 'Interface'] },
+    { acronym: 'GUI', words: ['Graphical', 'User', 'Interface'] },
+    { acronym: 'SEO', words: ['Search', 'Engine', 'Optimization'] },
+    { acronym: 'PIN', words: ['Personal', 'Identification', 'Number'] },
+    { acronym: 'CRM', words: ['Customer', 'Relationship', 'Management'] },
+    { acronym: 'CMS', words: ['Content', 'Management', 'System'] },
+    { acronym: 'PDF', words: ['Portable', 'Document', 'Format'] },
     { acronym: 'DNA', words: ['Deoxyribonucleic', 'Acid'] },
     { acronym: 'RNA', words: ['Ribonucleic', 'Acid'] },
-    { acronym: 'GDP', words: ['Gross', 'Domestic', 'Product'] },
-    { acronym: 'IMF', words: ['International', 'Monetary', 'Fund'] },
-    { acronym: 'WHO', words: ['World', 'Health', 'Organization'] },
-    { acronym: 'NATO', words: ['North', 'Atlantic', 'Treaty', 'Organization'] },
+    { acronym: 'FIFO', words: ['First', 'In', 'First', 'Out'] },
+    { acronym: 'LED', words: ['Light', 'Emitting', 'Diode'] },
+    { acronym: 'RAM', words: ['Random', 'Access', 'Memory'] },
+    { acronym: 'DNS', words: ['Domain', 'Name', 'System'] }
+  ]; 
+
+  const hardAcronyms = [
+    { acronym: 'SONAR', words: ['Sound', 'Navigation', 'And', 'Ranging'] },
+    { acronym: 'USB', words: ['Universal', 'Serial', 'Bus'] },
+    { acronym: 'BIOS', words: ['Basic', 'Input/Output', 'System'] },
+    { acronym: 'ADHD', words: ['Attention', 'Deficit', 'Hyperactivity', 'Disorder'] },
+    { acronym: 'COBOL', words: ['Common', 'Business', 'Oriented', 'Language'] },
+    { acronym: 'FORTRAN', words: ['Formula', 'Translation'] },
     { acronym: 'UNESCO', words: ['United', 'Nations', 'Educational', 'Scientific', 'and', 'Cultural', 'Organization'] },
     { acronym: 'IAEA', words: ['International', 'Atomic', 'Energy', 'Agency'] },
     { acronym: 'OPEC', words: ['Organization', 'of', 'the', 'Petroleum', 'Exporting', 'Countries'] },
@@ -72,7 +92,6 @@ const AcronymGuesser = () => {
     { acronym: 'MERCOSUR', words: ['Mercado', 'Común', 'del', 'Sur'] },
     { acronym: 'SAARC', words: ['South', 'Asian', 'Association', 'for', 'Regional', 'Cooperation'] },
     { acronym: 'APEC', words: ['Asia-Pacific', 'Economic', 'Cooperation'] },
-    { acronym: 'BRIC', words: ['Brazil', 'Russia', 'India', 'China'] },
     { acronym: 'BENELUX', words: ['Belgium', 'Netherlands', 'Luxembourg'] },
     { acronym: 'INTERPOL', words: ['International', 'Criminal', 'Police', 'Organization'] },
     { acronym: 'EUROPOL', words: ['European', 'Union', 'Agency', 'for', 'Law', 'Enforcement', 'Cooperation'] },
@@ -95,20 +114,15 @@ const AcronymGuesser = () => {
     { acronym: 'CSS', words: ['Cascading', 'Style', 'Sheets'] },
     { acronym: 'PHP', words: ['PHP:', 'Hypertext', 'Preprocessor'] },
     { acronym: 'SQL', words: ['Structured', 'Query', 'Language'] },
-    { acronym: 'API', words: ['Application', 'Programming', 'Interface'] },
     { acronym: 'AJAX', words: ['Asynchronous', 'JavaScript', 'and', 'XML'] },
     { acronym: 'JSON', words: ['JavaScript', 'Object', 'Notation'] },
     { acronym: 'REST', words: ['Representational', 'State', 'Transfer'] },
     { acronym: 'SOAP', words: ['Simple', 'Object', 'Access', 'Protocol'] },
     { acronym: 'XML', words: ['eXtensible', 'Markup', 'Language'] },
     { acronym: 'VOIP', words: ['Voice', 'Over', 'Internet', 'Protocol'] },
-    { acronym: 'CRM', words: ['Customer', 'Relationship', 'Management'] },
     { acronym: 'ERP', words: ['Enterprise', 'Resource', 'Planning'] },
-    { acronym: 'SEO', words: ['Search', 'Engine', 'Optimization'] },
-    { acronym: 'CMS', words: ['Content', 'Management', 'System'] },
     { acronym: 'EDI', words: ['Electronic', 'Data', 'Interchange'] },
     { acronym: 'OCR', words: ['Optical', 'Character', 'Recognition'] },
-    { acronym: 'GUI', words: ['Graphical', 'User', 'Interface'] },
     { acronym: 'IDE', words: ['Integrated', 'Development', 'Environment'] },
     { acronym: 'SDK', words: ['Software', 'Development', 'Kit'] },
     { acronym: 'BLOB', words: ['Binary', 'Large', 'Object'] },
@@ -121,11 +135,22 @@ const AcronymGuesser = () => {
     // ... (the rest of the acronyms remain the same as in the previous version)
   ];
 
+  const getAcronyms = () => {
+    switch (difficulty) {
+      case 'easy':
+        return easyAcronyms;
+      case 'hard':
+        return hardAcronyms;
+      default:
+        return mediumAcronyms;
+    }
+  };
   // useEffect(() => {
   //   newGame();
   // }, []);
 
   const newGame = () => {
+    const acronyms = getAcronyms(); 
     const randomAcronym = acronyms[Math.floor(Math.random() * acronyms.length)];
     setAcronym(randomAcronym.acronym);
     setAnswer(randomAcronym.words);
@@ -136,12 +161,20 @@ const AcronymGuesser = () => {
     setShowAnswerButton(false);
   };
 
+useEffect(() => {
+    newGame();
+  }, [difficulty]);
+
   const handleGuess = () => {
     if (guesses.length >= 5 || gameOver) return;
 
     const guessWords = currentGuess.split(' ');
     const guessesLeft = 5 - (guesses.length + 1);
-    setMessage(`You have ${guessesLeft} guesses left`);
+    setMessage(
+      <span className={`font-bold ${guessesLeft === 1 ? 'text-red-500' : ''}`}>
+        You have {guessesLeft} {guessesLeft === 1 ? 'guess' : 'guesses'} left!
+      </span>
+    );
     const newFeedback = guessWords.map((word, index) => {
       if (word.toLowerCase() === answer[index]?.toLowerCase()) {
         return 'correct';
@@ -174,11 +207,39 @@ const AcronymGuesser = () => {
     setMessage(`Game over! The correct answer was: ${answer.join(' ')}`); // Show the correct answer
   };
 
+  const handleDifficultyChange = (newDifficulty) => {
+    setDifficulty(newDifficulty);
+  };
+
   return (
     <div className="p-4 max-w-md mx-auto">
-      <h1 className="text-2xl font-bold mb-4">Acronynja Acronym Guesser</h1>
+      <h1 className="text-2xl font-bold mb-4">Acronynja</h1>
       <p className="mb-2">Think you know you know your acronyms?</p>
       <p className="mb-4">You have 5 guesses total to show it. Good luck!</p>
+
+      <div className="mb-4">
+        <p className="mb-2">Select difficulty:</p>
+        <div className="flex space-x-2">
+          <Button 
+            onClick={() => handleDifficultyChange('easy')}
+            className={difficulty === 'easy' ? 'bg-green-400' : 'bg-gray-100'}
+          >
+            Easy
+          </Button>
+          <Button 
+            onClick={() => handleDifficultyChange('medium')}
+            className={difficulty === 'medium' ? 'bg-cyan-500' : 'bg-gray-100'}
+          >
+            Medium
+          </Button>
+          <Button 
+            onClick={() => handleDifficultyChange('hard')}
+            className={difficulty === 'hard' ? 'bg-red-500' : 'bg-gray-100'}
+          >
+            Hard
+          </Button>
+        </div>
+      </div>
       <p className="mb-2">Guess the meaning of: <strong>{acronym}</strong></p>
       
       
@@ -200,21 +261,23 @@ const AcronymGuesser = () => {
       ))}
 
       {!gameOver && (
-        <div className="flex space-x-4 mb-4">
+        <div className="relative flex space-x-4 mb-4 min-w-[150px]">
           <Input
             type="text"
             value={currentGuess}
             onChange={(e) => setCurrentGuess(e.target.value)}
             placeholder={`Enter guess ${guesses.length + 1} of 5`}
-            className="mb-2"
+            className="mb-2 w-full min-w-[200px]"
           />
-          <Button onClick={handleGuess} disabled={!currentGuess}>Submit Guess</Button>
+          <Button onClick={handleGuess} disabled={!currentGuess} className="relative flex px-6 min-w-[150px]">
+            <span className="absolute top-0 right-0 mt-1 mr-1 flex h-3 w-3">  
+            </span>
+            Submit Guess
+          </Button>
         
   {showAnswerButton && !gameOver && (
     <Button className="relative flex items-center justify-center px-6 min-w-[200px] whitespace-nowrap" onClick={handleShowAnswer}>
       <span className="absolute top-0 right-0 mt-1 mr-1 flex h-3 w-3">
-        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
-        <span className="relative inline-flex rounded-full h-3 w-3 bg-sky-500"></span>
       </span>
       Show me the answer!
     </Button>
