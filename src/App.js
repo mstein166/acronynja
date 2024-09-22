@@ -3,7 +3,8 @@ import { Input } from "./components/ui/input"
 import { Button } from "./components/ui/button"
 import { Alert, AlertDescription, AlertTitle } from "./components/ui/alert"
 import Confetti from 'react-confetti'
-// import ShineBorder from "@/components/magicui/shine-border"
+import { Clover } from 'lucide-react'
+//
 
 
 const AcronymGuesser = () => {
@@ -17,6 +18,7 @@ const AcronymGuesser = () => {
   const [showAnswerButton, setShowAnswerButton] = useState(false);
   const [difficulty, setDifficulty] = useState('medium');
   const [showConfetti, setShowConfetti] = useState(false);
+  const [gameStarted, setGameStarted] = useState(false); 
 
   const easyAcronyms = [
     { acronym: 'NASA', words: ['National', 'Aeronautics', 'and', 'Space', 'Administration'] },
@@ -162,6 +164,7 @@ const AcronymGuesser = () => {
     setMessage('');
     setShowAnswerButton(false);
     setShowConfetti(false); 
+    setGameStarted(true); 
   };
 
 useEffect(() => {
@@ -196,7 +199,8 @@ useEffect(() => {
       setShowAnswerButton(true);
     }
 
-    if (newFeedback.every(fb => fb === 'correct')) {
+    // Check if all words are correct and the number of guessed words matches the answer
+    if (newFeedback.every(fb => fb === 'correct') && guessWords.length === answer.length) {
       setGameOver(true);
       setMessage('Congratulations! You guessed the acronym correctly!');
       setShowConfetti(true);
@@ -218,9 +222,9 @@ useEffect(() => {
   return (
     <div className="p-4 max-w-md mx-auto">
       {showConfetti && <Confetti />}
-      <h1 className="text-2xl font-bold mb-4">Acronynja</h1>
-      <p className="mb-2">Think you know you know your acronyms?</p>
-      <p className="mb-4">You have 5 guesses total to show it. Good luck!</p>
+      <h1 className="text-2xl font-bold mb-4">🥷 Acronynja 🥷</h1>
+      <p className="font-semibold mb-2">Think you know you know your acronyms?</p>
+      <p className="font-semibold mb-4">You have <span className="text-red-500">5</span> guesses total to show it. Good luck!</p>
 
       <div className="mb-4">
         <p className="mb-2">Select difficulty:</p>
@@ -297,7 +301,9 @@ useEffect(() => {
         </Alert>
       )}
 
+{gameStarted && gameOver && (
       <Button onClick={newGame}>New Game</Button>
+)}
     </div>
   );
 };
